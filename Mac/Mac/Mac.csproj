@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{062A24E6-D4FD-4EC3-B1E8-C6AB74C2CF8D}</ProjectGuid>
+    <ProjectTypeGuids>{948B3504-5B70-4649-8FE4-BDE1FB46EC69};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Mac</RootNamespace>
+    <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
+    <AssemblyName>Mac</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeMonoRuntime>False</IncludeMonoRuntime>
+    <PlatformTarget>x86</PlatformTarget>
+    <EnablePackageSigning>False</EnablePackageSigning>
+    <ConsolePause>False</ConsolePause>
+    <EnableCodeSigning>False</EnableCodeSigning>
+    <CreatePackage>False</CreatePackage>
+    <CodeSigningKey>Mac Developer</CodeSigningKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeMonoRuntime>False</IncludeMonoRuntime>
+    <LinkMode>Full</LinkMode>
+    <PlatformTarget>x86</PlatformTarget>
+    <EnablePackageSigning>False</EnablePackageSigning>
+    <ConsolePause>False</ConsolePause>
+    <EnableCodeSigning>False</EnableCodeSigning>
+    <CreatePackage>False</CreatePackage>
+    <CodeSigningKey>Mac Developer</CodeSigningKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\x86\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeMonoRuntime>True</IncludeMonoRuntime>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <PlatformTarget>x86</PlatformTarget>
+    <LinkMode>Full</LinkMode>
+    <EnableCodeSigning>True</EnableCodeSigning>
+    <ConsolePause>False</ConsolePause>
+    <EnablePackageSigning>True</EnablePackageSigning>
+    <CreatePackage>True</CreatePackage>
+    <CodeSigningKey>3rd Party Mac Developer Application</CodeSigningKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="MonoMac" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="AppDelegate.designer.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChessGame.cs" />
+    <Compile Include="..\..\ChessEngine\ChessBoard.cs">
+      <Link>ChessEngine\ChessBoard.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ChessEngine\ChessEngine.cs">
+      <Link>ChessEngine\ChessEngine.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ChessEngine\ChessPiece.cs">
+      <Link>ChessEngine\ChessPiece.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ChessEngine\Moves\Evaluation.cs">
+      <Link>ChessEngine\Moves\Evaluation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ChessEngine\Moves\MoveContent.cs">
+      <Link>ChessEngine\Moves\MoveContent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ChessEngine\Moves\PieceMoves.cs">
+      <Link>ChessEngine\Moves\PieceMoves.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ChessEngine\Moves\PieceValidMoves.cs">
+      <Link>ChessEngine\Moves\PieceValidMoves.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ChessEngine\Moves\SearchMove.cs">
+      <Link>ChessEngine\Moves\SearchMove.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Mono\MonoMac\v0.0\Mono.MonoMac.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Downloads\MonoGame-develop3d\ThirdParty\Lidgren.Network\Lidgren.Network.MacOS.csproj">
+      <Project>{AE483C29-042E-4226-BA52-D247CE7676DA}</Project>
+      <Name>Lidgren.Network.MacOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Downloads\MonoGame-develop3d\MonoGame.Framework\MonoGame.Framework.MacOS.csproj">
+      <Project>{36C538E6-C32A-4A8D-A39C-566173D7118E}</Project>
+      <Name>MonoGame.Framework.MacOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ChessEngine\" />
+    <Folder Include="ChessEngine\Moves\" />
+    <Folder Include="Content\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MainMenu.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\PieceGraphics\King_White.png">
+      <Link>Content\King_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Bishop_Black.png">
+      <Link>Content\Bishop_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Bishop_White.png">
+      <Link>Content\Bishop_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\King_Black.png">
+      <Link>Content\King_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Knight_Black.png">
+      <Link>Content\Knight_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Knight_White.png">
+      <Link>Content\Knight_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Pawn_Black.png">
+      <Link>Content\Pawn_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Pawn_White.png">
+      <Link>Content\Pawn_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Queen_Black.png">
+      <Link>Content\Queen_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Queen_White.png">
+      <Link>Content\Queen_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Rook_Black.png">
+      <Link>Content\Rook_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\Rook_White.png">
+      <Link>Content\Rook_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\blackcheck.png">
+      <Link>Content\blackcheck.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\undo.png">
+      <Link>Content\undo.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\PieceGraphics\whitecheck.png">
+      <Link>Content\whitecheck.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

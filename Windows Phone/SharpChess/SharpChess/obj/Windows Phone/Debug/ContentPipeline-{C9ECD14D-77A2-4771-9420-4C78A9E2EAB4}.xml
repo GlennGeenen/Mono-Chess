@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Bishop_Black.png</Source>
+      <Name>Bishop_Black</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Bishop_Black.xnb</Output>
+      <Time>2013-01-08T15:28:54.2244526+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Bishop_White.png</Source>
+      <Name>Bishop_White</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Bishop_White.xnb</Output>
+      <Time>2013-01-08T15:29:12.9844594+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\King_Black.png</Source>
+      <Name>King_Black</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\King_Black.xnb</Output>
+      <Time>2013-01-08T15:29:31.0850217+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\King_White.png</Source>
+      <Name>King_White</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\King_White.xnb</Output>
+      <Time>2013-01-08T15:29:44.4537486+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Knight_Black.png</Source>
+      <Name>Knight_Black</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Knight_Black.xnb</Output>
+      <Time>2013-01-08T15:30:29.6232686+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Knight_White.png</Source>
+      <Name>Knight_White</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Knight_White.xnb</Output>
+      <Time>2013-01-08T15:30:44.4478171+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Pawn_Black.png</Source>
+      <Name>Pawn_Black</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Pawn_Black.xnb</Output>
+      <Time>2013-01-08T15:30:55.9070917+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Pawn_White.png</Source>
+      <Name>Pawn_White</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Pawn_White.xnb</Output>
+      <Time>2013-01-08T15:31:08.9008832+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Queen_Black.png</Source>
+      <Name>Queen_Black</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Queen_Black.xnb</Output>
+      <Time>2013-01-08T15:31:20.3345835+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Queen_White.png</Source>
+      <Name>Queen_White</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Queen_White.xnb</Output>
+      <Time>2013-01-08T15:31:32.4869536+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Rook_Black.png</Source>
+      <Name>Rook_Black</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Rook_Black.xnb</Output>
+      <Time>2013-01-08T15:31:46.9614995+01:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\PieceGraphics\Rook_White.png</Source>
+      <Name>Rook_White</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Rook_White.xnb</Output>
+      <Time>2013-01-08T15:31:59.6856087+01:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{C9ECD14D-77A2-4771-9420-4C78A9E2EAB4}</ContentProjectGUID>
+      <TargetPlatform>WindowsPhone</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChessContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\obj\Windows Phone\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2013-01-04T08:43:55.2463618+01:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

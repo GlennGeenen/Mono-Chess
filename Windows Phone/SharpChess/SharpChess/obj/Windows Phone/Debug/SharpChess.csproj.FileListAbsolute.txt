@@ -1,0 +1,50 @@
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.dll
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.pdb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\obj\Windows Phone\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\obj\Windows Phone\Debug\SharpChess.dll
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\obj\Windows Phone\Debug\SharpChess.pdb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\AppManifest.xaml
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\obj\Windows Phone\Debug\WMAppManifest.xml.g
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\obj\Windows Phone\Debug\WMAppManifest.xml
+bin\Windows Phone\Debug\
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.xap
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\obj\Windows Phone\Debug\XapCacheFile.xml
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Bishop_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Bishop_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\King_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\King_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Knight_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Knight_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Pawn_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Pawn_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Queen_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Queen_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Rook_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\PieceGraphics\Rook_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.dll.CodeAnalysisLog.xml
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\SharpChess\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.dll.lastcodeanalysissucceeded
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\obj\Windows Phone\Debug\SharpChess.csprojResolveAssemblyReference.cache
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\obj\Windows Phone\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\obj\Windows Phone\Debug\SharpChess.dll
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\obj\Windows Phone\Debug\SharpChess.pdb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.dll
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.pdb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.dll.CodeAnalysisLog.xml
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.dll.lastcodeanalysissucceeded
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\AppManifest.xaml
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\obj\Windows Phone\Debug\WMAppManifest.xml.g
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\obj\Windows Phone\Debug\WMAppManifest.xml
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\SharpChess.xap
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\obj\Windows Phone\Debug\XapCacheFile.xml
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Bishop_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Bishop_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\King_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\King_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Knight_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Knight_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Pawn_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Pawn_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Queen_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Queen_White.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Rook_Black.xnb
+C:\Users\Glenn\Documents\Visual Studio 2012\Projects\Mono Chess\Windows Phone\SharpChess\SharpChess\bin\Windows Phone\Debug\Content\Rook_White.xnb

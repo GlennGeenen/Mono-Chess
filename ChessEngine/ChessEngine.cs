@@ -17,20 +17,16 @@ namespace MonoChess
 
         public static void EngineMove(ChessBoard board)
         {
-
             if (CheckForMate(board.WhoseMove, board))
             {
                 return;
             }
 
-            //TODO: Measure Execution Time
             System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
             watch.Start();
 
-            MoveContent bestMove = new MoveContent();
-
             //If there is no playbook move search for the best move
-            bestMove = SearchMove.AlphaBetaRoot(board, Constants.ply);
+            MoveContent bestMove = SearchMove.AlphaBetaRoot(board, Constants.ply);
             ChessEngine.MoveContent(board, bestMove.MovingPiecePrimary.SrcPosition, bestMove.MovingPiecePrimary.DstPosition, ChessPieceType.Queen);
 
             PieceValidMoves.GenerateValidMoves(board);

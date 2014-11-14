@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MonoChess
 {
@@ -12,9 +13,10 @@ namespace MonoChess
             internal int Score;
         }
 
-        internal struct ResultBoards
+        internal struct SearchResult
         {
-            internal List<ChessBoard> Positions;
+            internal int alpha;
+            internal MoveContent bestMove;
         }
 
         private static byte nodesSearched;
@@ -32,19 +34,9 @@ namespace MonoChess
                 return score;
         }
 
-        internal static MoveContent AlphaBetaRoot(ChessBoard examineBoard, byte depth)
+        private static List<ChessBoard> getValidBoards(ChessBoard examineBoard)
         {
-            nodesSearched = 0;
-
-            int alpha = -400000000;
-            const int beta = 400000000;
-
-            ChessBoard bestBoard = new ChessBoard(short.MinValue);
-
-            //We are going to store our result boards here           
-            ResultBoards succ = new ResultBoards();
-            succ.Positions = new List<ChessBoard>();
-
+            List<ChessBoard> validBoards = new List<ChessBoard>();
             for (byte x = 0; x < 64; ++x)
             {
                 ChessPiece piece = examineBoard.pieces[x];
@@ -83,37 +75,44 @@ namespace MonoChess
                     //Invert Score to support Negamax
                     board.Score = SideToMoveScore(board.Score, board.WhoseMove);
 
-                    succ.Positions.Add(board);
+                    validBoards.Add(board);
                 }
             }
+            return validBoards;
+        }
 
-            //Why we need sorting?
-            succ.Positions.Sort(ChessBoard.Sort);
+        private static SearchResult getBestMove(ChessBoard examineBoard, List<ChessBoard> validBoards, byte depth)
+        {
+            int alpha = -400000000;
+            const int beta = 400000000;
+
+            SearchResult result = new SearchResult();
+
+            // Sort by score, this increases te chance we can prune moves early on
+            validBoards.Sort(ChessBoard.Sort);
 
             //Can I make an instant mate?
-            foreach (ChessBoard pos in succ.Positions)
+            foreach (ChessBoard pos in validBoards)
             {
                 int value = -AlphaBeta(pos, 1, -beta, -alpha);
                 if (value >= Constants.GameOverValue)
                 {
-                    return pos.LastMove;
+                    result.alpha = value;
+                    result.bestMove = pos.LastMove;
+                    return result;
                 }
             }
             --depth;
 
-            byte plyDepthReached = ModifyDepth(depth, succ.Positions.Count);
-
+            byte plyDepthReached = ModifyDepth(depth, validBoards.Count);
             int currentBoard = 0;
             alpha = -400000000;
 
-            //Why we need sorting?
-            succ.Positions.Sort(ChessBoard.Sort);
-
-            for(int i = 0; i < succ.Positions.Count; ++i)
+            ChessBoard bestBoard = new ChessBoard(short.MinValue);
+            foreach (ChessBoard board in validBoards)
             {
                 ++currentBoard;
-                ChessBoard board = succ.Positions[i];
-                
+
                 int value = -AlphaBeta(board, plyDepthReached, -beta, -alpha);
                 board.Score = value;
 
@@ -125,9 +124,30 @@ namespace MonoChess
                 }
             }
 
+            result.alpha = alpha;
+            result.bestMove = bestBoard.LastMove;
+            return result;
+        }
+
+        internal static MoveContent AlphaBetaRoot(ChessBoard examineBoard, byte depth)
+        {
+            nodesSearched = 0;
+            SearchResult result = new SearchResult();
+
+            //We are going to store our result boards here           
+            List<ChessBoard> validBoards = getValidBoards(examineBoard);
+
+             Thread threadOne = new Thread(() =>
+            {
+                result = getBestMove(examineBoard, validBoards, depth);
+            });
+
+            threadOne.Start();
+            threadOne.Join();
+
             System.Diagnostics.Debug.WriteLine("Node Searched: " + nodesSearched);
 
-            return bestBoard.LastMove;
+            return result.bestMove;
         }
 
         private static byte ModifyDepth(byte depth, int possibleMoves)
@@ -137,77 +157,6 @@ namespace MonoChess
                 ++depth;
             }
             return depth;
-        }
-
-        private static int MinMax(ChessBoard examineBoard, byte depth)
-        {
-            if (depth == 0)
-            {
-                //Evaluate Score
-                Evaluation.EvaluateBoardScore(examineBoard);
-                //Invert Score to support Negamax
-                return SideToMoveScore(examineBoard.Score, examineBoard.WhoseMove);
-            }
-
-            List<Position> positions = EvaluateMoves(examineBoard, depth);
-
-            if (examineBoard.whiteInCheck || examineBoard.blackInCheck || positions.Count == 0)
-            {
-                if (SearchForMate(examineBoard.WhoseMove, examineBoard, ref examineBoard.blackInMate, ref examineBoard.whiteInMate, ref examineBoard.staleMate))
-                {
-                    if (examineBoard.blackInMate)
-                    {
-                        if (examineBoard.WhoseMove == ChessPieceColor.Black)
-                            return -Constants.GameOverValue - depth;
-
-                        return Constants.GameOverValue + depth;
-                    }
-                    if (examineBoard.whiteInMate)
-                    {
-                        if (examineBoard.WhoseMove == ChessPieceColor.Black)
-                            return Constants.GameOverValue + depth;
-
-                        return -Constants.GameOverValue - depth;
-                    }
-
-                    //If Not Mate then StaleMate
-                    return 0;
-                }
-            }
-
-            int bestScore = -Constants.GameOverValue;
-
-            foreach (Position move in positions)
-            {
-                //Make a copy
-                ChessBoard board = new ChessBoard(examineBoard);
-
-                //Move Piece
-                ChessEngine.MoveContent(board, move.SrcPosition, move.DstPosition, ChessPieceType.Queen);
-
-                //We Generate Valid Moves for Board
-                PieceValidMoves.GenerateValidMoves(board);
-
-                if (board.blackInCheck && examineBoard.WhoseMove == ChessPieceColor.Black)
-                {
-                    //Invalid Move
-                    continue;
-                }
-
-                if (board.whiteInCheck && examineBoard.WhoseMove == ChessPieceColor.White)
-                {
-                    //Invalid Move
-                    continue;
-                }
-
-                int value = -MinMax(board, (byte)(depth - 1));
-                if (value > bestScore)
-                {
-                    bestScore = value;
-                }
-            }
-
-            return bestScore;
         }
 
         internal static List<Position> EvaluateMoves(ChessBoard board, byte depth)
@@ -326,15 +275,15 @@ namespace MonoChess
                     {
                         if (examineBoard.WhoseMove == ChessPieceColor.Black)
                             return -Constants.GameOverValue - depth;
-
-                        return Constants.GameOverValue + depth;
+                        else
+                            return Constants.GameOverValue + depth;
                     }
                     if (examineBoard.whiteInMate)
                     {
                         if (examineBoard.WhoseMove == ChessPieceColor.Black)
                             return Constants.GameOverValue + depth;
-
-                        return -Constants.GameOverValue - depth;
+                        else
+                            return -Constants.GameOverValue - depth;
                     }
 
                     //If Not Mate then StaleMate
@@ -342,7 +291,7 @@ namespace MonoChess
                 }
             }
 
-            //Why we need sorting?
+            // Sort by score, this increases te chance we can prune moves early on
             positions.Sort(Sort);
 
             foreach (Position move in positions)

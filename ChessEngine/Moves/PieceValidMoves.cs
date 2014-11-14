@@ -10,15 +10,17 @@ namespace MonoChess
         internal static bool[] WhiteAttackBoard;
         private static byte whiteKingPosition;
 
-        private static void AnalyzeMovePawn(ChessBoard board, byte dstPos, ChessPiece pcMoving)
+        private static void AnalyzeMovePawn(ChessBoard board, byte dstPos, ChessPiece movingPiece)
         {
+            bool movingPieceIsWhite = movingPiece.PieceColor == ChessPieceColor.White;
+
             //Because Pawns only kill diagonaly we handle the En Passant scenario specialy
-            if (board.EnPassantPosition > 0 && pcMoving.PieceColor != board.EnPassantColor && board.EnPassantPosition == dstPos)
+            if (board.EnPassantPosition == dstPos && board.EnPassantPosition > 0 && movingPiece.PieceColor != board.EnPassantColor)
             {
                 //We have an En Passant Possible
-                pcMoving.ValidMoves.Push(dstPos);
+                movingPiece.ValidMoves.Push(dstPos);
 
-                if (pcMoving.PieceColor == ChessPieceColor.White)
+                if (movingPieceIsWhite)
                 {
                     WhiteAttackBoard[dstPos] = true;
                 }
@@ -35,18 +37,18 @@ namespace MonoChess
                 return;
 
             //Regardless of what is there I am attacking this square
-            if (pcMoving.PieceColor == ChessPieceColor.White)
+            if (movingPieceIsWhite)
             {
                 WhiteAttackBoard[dstPos] = true;
 
                 //if that piece is the same color
-                if (pcAttacked.PieceColor == pcMoving.PieceColor)
+                if (pcAttacked.PieceColor == movingPiece.PieceColor)
                 {
-                    pcAttacked.DefendedValue += pcMoving.PieceActionValue;
+                    pcAttacked.DefendedValue += movingPiece.PieceActionValue;
                     return;
                 }
 
-                pcAttacked.AttackedValue += pcMoving.PieceActionValue;
+                pcAttacked.AttackedValue += movingPiece.PieceActionValue;
 
                 //If this is a king set it in check                   
                 if (pcAttacked.Identifier == ChessPieceType.King)
@@ -56,7 +58,7 @@ namespace MonoChess
                 else
                 {
                     //Add this as a valid move
-                    pcMoving.ValidMoves.Push(dstPos);
+                    movingPiece.ValidMoves.Push(dstPos);
                 }
             }
             else
@@ -64,13 +66,13 @@ namespace MonoChess
                 BlackAttackBoard[dstPos] = true;
 
                 //if that piece is the same color
-                if (pcAttacked.PieceColor == pcMoving.PieceColor)
+                if (pcAttacked.PieceColor == movingPiece.PieceColor)
                 {
-                    pcAttacked.DefendedValue += pcMoving.PieceActionValue;
+                    pcAttacked.DefendedValue += movingPiece.PieceActionValue;
                     return;
                 }
 
-                pcAttacked.AttackedValue += pcMoving.PieceActionValue;
+                pcAttacked.AttackedValue += movingPiece.PieceActionValue;
 
                 //If this is a king set it in check                   
                 if (pcAttacked.Identifier == ChessPieceType.King)
@@ -80,17 +82,19 @@ namespace MonoChess
                 else
                 {
                     //Add this as a valid move
-                    pcMoving.ValidMoves.Push(dstPos);
+                    movingPiece.ValidMoves.Push(dstPos);
                 }
             }
 
             return;
         }
 
-        private static bool AnalyzeMove(ChessBoard board, byte dstPos, ChessPiece pcMoving)
+        private static bool AnalyzeMove(ChessBoard board, byte dstPos, ChessPiece movingPiece)
         {
             //If I am not a pawn everywhere I move I can attack
-            if (pcMoving.PieceColor == ChessPieceColor.White)
+
+            bool movingPieceIsWhite = movingPiece.PieceColor == ChessPieceColor.White;
+            if (movingPieceIsWhite)
             {
                 WhiteAttackBoard[dstPos] = true;
             }
@@ -102,22 +106,21 @@ namespace MonoChess
             //If there no piece there I can potentialy kill just add the move and exit
             if (board.pieces[dstPos] == null)
             {
-                pcMoving.ValidMoves.Push(dstPos);
-
+                movingPiece.ValidMoves.Push(dstPos);
                 return true;
             }
 
             ChessPiece pcAttacked = board.pieces[dstPos];
 
             //if that piece is a different color
-            if (pcAttacked.PieceColor != pcMoving.PieceColor)
+            if (pcAttacked.PieceColor != movingPiece.PieceColor)
             {
-                pcAttacked.AttackedValue += pcMoving.PieceActionValue;
+                pcAttacked.AttackedValue += movingPiece.PieceActionValue;
 
                 //If this is a king set it in check                   
                 if (pcAttacked.Identifier == ChessPieceType.King)
                 {
-                    if (pcAttacked.PieceColor == ChessPieceColor.Black)
+                    if (movingPieceIsWhite)
                     {
                         board.blackInCheck = true;
                     }
@@ -129,28 +132,29 @@ namespace MonoChess
                 else
                 {
                     //Add this as a valid move
-                    pcMoving.ValidMoves.Push(dstPos);
+                    movingPiece.ValidMoves.Push(dstPos);
                 }
-
 
                 //We don't continue movement past this piece
                 return false;
             }
+
             //Same Color I am defending
-            pcAttacked.DefendedValue += pcMoving.PieceActionValue;
+            pcAttacked.DefendedValue += movingPiece.PieceActionValue;
 
             //Since this piece is of my kind I can't move there
             return false;
         }
 
-        private static void CheckValidMovesPawn(List<byte> moves, ChessPiece pcMoving, byte srcPosition,
+        private static void CheckValidMovesPawn(byte[] moves, ChessPiece pcMoving, byte srcPosition,
                                                 ChessBoard board, byte count)
         {
             for (byte i = 0; i < count; ++i)
             {
                 byte dstPos = moves[i];
 
-                if (dstPos%8 != srcPosition % 8)
+                // Piece in capture position
+                if (dstPos % 8 != srcPosition % 8)
                 {
                     //If there is a piece there I can potentialy kill
                     AnalyzeMovePawn(board, dstPos, pcMoving);
@@ -164,7 +168,7 @@ namespace MonoChess
                         BlackAttackBoard[dstPos] = true;
                     }
                 }
-                    // if there is something if front pawns can't move there
+                    // if there is something in front pawns can't move there
                 else if (board.pieces[dstPos] != null)
                 {
                     return;
@@ -186,7 +190,7 @@ namespace MonoChess
 
             for (byte i = 0; i < MoveArrays.KingTotalMoves[srcPosition]; ++i)
             {
-                byte dstPos = MoveArrays.KingMoves[srcPosition].Moves[i];
+                byte dstPos = MoveArrays.KingMoves[srcPosition][i];
 
                 if (piece.PieceColor == ChessPieceColor.White)
                 {
@@ -362,14 +366,14 @@ namespace MonoChess
                         {
                             if (piece.PieceColor == ChessPieceColor.White)
                             {
-                                CheckValidMovesPawn(MoveArrays.WhitePawnMoves[x].Moves, piece, x,
+                                CheckValidMovesPawn(MoveArrays.WhitePawnMoves[x], piece, x,
                                                     board,
                                                     MoveArrays.WhitePawnTotalMoves[x]);
                                 break;
                             }
                             if (piece.PieceColor == ChessPieceColor.Black)
                             {
-                                CheckValidMovesPawn(MoveArrays.BlackPawnMoves[x].Moves, piece, x,
+                                CheckValidMovesPawn(MoveArrays.BlackPawnMoves[x], piece, x,
                                                     board,
                                                     MoveArrays.BlackPawnTotalMoves[x]);
                                 break;
@@ -381,7 +385,7 @@ namespace MonoChess
                         {
                             for (byte i = 0; i < MoveArrays.KnightTotalMoves[x]; ++i)
                             {
-                                AnalyzeMove(board, MoveArrays.KnightMoves[x].Moves[i], piece);
+                                AnalyzeMove(board, MoveArrays.KnightMoves[x][i], piece);
                             }
 
                             break;
@@ -391,7 +395,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.BishopTotalMoves1[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.BishopMoves1[x].Moves[i],
+                                    AnalyzeMove(board, MoveArrays.BishopMoves1[x][i],
                                                 piece) ==
                                     false)
                                 {
@@ -401,7 +405,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.BishopTotalMoves2[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.BishopMoves2[x].Moves[i],
+                                    AnalyzeMove(board, MoveArrays.BishopMoves2[x][i],
                                                 piece) ==
                                     false)
                                 {
@@ -411,7 +415,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.BishopTotalMoves3[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.BishopMoves3[x].Moves[i],
+                                    AnalyzeMove(board, MoveArrays.BishopMoves3[x][i],
                                                 piece) ==
                                     false)
                                 {
@@ -421,7 +425,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.BishopTotalMoves4[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.BishopMoves4[x].Moves[i],
+                                    AnalyzeMove(board, MoveArrays.BishopMoves4[x][i],
                                                 piece) ==
                                     false)
                                 {
@@ -436,7 +440,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.RookTotalMoves1[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.RookMoves1[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.RookMoves1[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -445,7 +449,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.RookTotalMoves2[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.RookMoves2[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.RookMoves2[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -454,7 +458,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.RookTotalMoves3[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.RookMoves3[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.RookMoves3[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -463,7 +467,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.RookTotalMoves4[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.RookMoves4[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.RookMoves4[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -477,7 +481,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.QueenTotalMoves1[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves1[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.QueenMoves1[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -486,7 +490,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.QueenTotalMoves2[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves2[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.QueenMoves2[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -495,7 +499,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.QueenTotalMoves3[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves3[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.QueenMoves3[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -504,7 +508,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.QueenTotalMoves4[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves4[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.QueenMoves4[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -514,7 +518,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.QueenTotalMoves5[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves5[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.QueenMoves5[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -523,7 +527,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.QueenTotalMoves6[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves6[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.QueenMoves6[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -532,7 +536,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.QueenTotalMoves7[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves7[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.QueenMoves7[x][i], piece) ==
                                     false)
                                 {
                                     break;
@@ -541,7 +545,7 @@ namespace MonoChess
                             for (byte i = 0; i < MoveArrays.QueenTotalMoves8[x]; ++i)
                             {
                                 if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves8[x].Moves[i], piece) ==
+                                    AnalyzeMove(board, MoveArrays.QueenMoves8[x][i], piece) ==
                                     false)
                                 {
                                     break;

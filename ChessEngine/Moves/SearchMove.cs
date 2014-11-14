@@ -267,7 +267,9 @@ namespace MonoChess
 
             List<Position> positions = EvaluateMoves(examineBoard,depth);
 
-            if (examineBoard.whiteInCheck || examineBoard.blackInCheck || positions.Count == 0)
+            int length = positions.Count;
+
+            if (examineBoard.whiteInCheck || examineBoard.blackInCheck || length == 0)
             {
                 if (SearchForMate(examineBoard.WhoseMove, examineBoard, ref examineBoard.blackInMate, ref examineBoard.whiteInMate, ref examineBoard.staleMate))
                 {
@@ -294,8 +296,10 @@ namespace MonoChess
             // Sort by score, this increases te chance we can prune moves early on
             positions.Sort(Sort);
 
-            foreach (Position move in positions)
+            for (int i = 0; i < length; ++i)
             {
+                Position move = positions[i];
+
                 //Make a copy
                 ChessBoard board = new ChessBoard(examineBoard);
 

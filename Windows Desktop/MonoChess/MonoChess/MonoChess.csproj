@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1B1D52BC-E28C-4BAE-B917-1CA4C42338F0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonoChess</RootNamespace>
+    <AssemblyName>MonoChess</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Windows\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Windows\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\ChessEngine\ChessBoard.cs">
+      <Link>ChessEngine\ChessBoard.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ChessEngine\ChessEngine.cs">
+      <Link>ChessEngine\ChessEngine.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ChessEngine\ChessPiece.cs">
+      <Link>ChessEngine\ChessPiece.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ChessEngine\Moves\Evaluation.cs">
+      <Link>ChessEngine\Moves\Evaluation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ChessEngine\Moves\MoveContent.cs">
+      <Link>ChessEngine\Moves\MoveContent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ChessEngine\Moves\PieceMoves.cs">
+      <Link>ChessEngine\Moves\PieceMoves.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ChessEngine\Moves\PieceValidMoves.cs">
+      <Link>ChessEngine\Moves\PieceValidMoves.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ChessEngine\Moves\SearchMove.cs">
+      <Link>ChessEngine\Moves\SearchMove.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MonoGame\MonoGame.cs">
+      <Link>MonoGame.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\MonoGame\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\PieceGraphics\Bishop_Black.png">
+      <Link>Content\Bishop_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Bishop_White.png">
+      <Link>Content\Bishop_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\blackcheck.png">
+      <Link>Content\blackcheck.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\King_Black.png">
+      <Link>Content\King_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\King_White.png">
+      <Link>Content\King_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Knight_Black.png">
+      <Link>Content\Knight_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Knight_White.png">
+      <Link>Content\Knight_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Pawn_Black.png">
+      <Link>Content\Pawn_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Pawn_White.png">
+      <Link>Content\Pawn_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Queen_Black.png">
+      <Link>Content\Queen_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Queen_White.png">
+      <Link>Content\Queen_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Rook_Black.png">
+      <Link>Content\Rook_Black.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\Rook_White.png">
+      <Link>Content\Rook_White.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\undo.png">
+      <Link>Content\undo.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\PieceGraphics\whitecheck.png">
+      <Link>Content\whitecheck.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -103,18 +103,19 @@ namespace MonoChess
                 BlackAttackBoard[dstPos] = true;
             }
 
+            ChessPiece pcAttacked = board.pieces[dstPos];
+
             //If there no piece there I can potentialy kill just add the move and exit
-            if (board.pieces[dstPos] == null)
+            if (pcAttacked == null)
             {
                 movingPiece.ValidMoves.Push(dstPos);
                 return true;
             }
 
-            ChessPiece pcAttacked = board.pieces[dstPos];
-
-            //if that piece is a different color
             if (pcAttacked.PieceColor != movingPiece.PieceColor)
             {
+                // Different color I am attacking
+
                 pcAttacked.AttackedValue += movingPiece.PieceActionValue;
 
                 //If this is a king set it in check                   
@@ -138,12 +139,14 @@ namespace MonoChess
                 //We don't continue movement past this piece
                 return false;
             }
+            else
+            {
+                //Same Color I am defending
+                pcAttacked.DefendedValue += movingPiece.PieceActionValue;
 
-            //Same Color I am defending
-            pcAttacked.DefendedValue += movingPiece.PieceActionValue;
-
-            //Since this piece is of my kind I can't move there
-            return false;
+                //Since this piece is of my kind I can't move there
+                return false;
+            }
         }
 
         private static void CheckValidMovesPawn(byte[] moves, ChessPiece pcMoving, byte srcPosition,
@@ -188,7 +191,8 @@ namespace MonoChess
                 return;
             }
 
-            for (byte i = 0; i < MoveArrays.KingTotalMoves[srcPosition]; ++i)
+            byte length = MoveArrays.KingTotalMoves[srcPosition];
+            for (byte i = 0; i < length; ++i)
             {
                 byte dstPos = MoveArrays.KingMoves[srcPosition][i];
 
@@ -366,7 +370,7 @@ namespace MonoChess
                         {
                             if (piece.PieceColor == ChessPieceColor.White)
                             {
-                                CheckValidMovesPawn(MoveArrays.WhitePawnMoves[x], piece, x,
+                                CheckValidMovesPawn(MoveArrays.WhitePawnMoves[x],piece, x,
                                                     board,
                                                     MoveArrays.WhitePawnTotalMoves[x]);
                                 break;
@@ -383,7 +387,8 @@ namespace MonoChess
                         }
                     case ChessPieceType.Knight:
                         {
-                            for (byte i = 0; i < MoveArrays.KnightTotalMoves[x]; ++i)
+                            byte length = MoveArrays.KnightTotalMoves[x];
+                            for (byte i = 0; i < length; ++i)
                             {
                                 AnalyzeMove(board, MoveArrays.KnightMoves[x][i], piece);
                             }
@@ -392,83 +397,70 @@ namespace MonoChess
                         }
                     case ChessPieceType.Bishop:
                         {
-                            for (byte i = 0; i < MoveArrays.BishopTotalMoves1[x]; ++i)
+                            byte length = MoveArrays.BishopTotalMoves1[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.BishopMoves1[x][i],
-                                                piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.BishopMoves1[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.BishopTotalMoves2[x]; ++i)
+                            length = MoveArrays.BishopTotalMoves2[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.BishopMoves2[x][i],
-                                                piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.BishopMoves2[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.BishopTotalMoves3[x]; ++i)
+                            length = MoveArrays.BishopTotalMoves3[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.BishopMoves3[x][i],
-                                                piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.BishopMoves3[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.BishopTotalMoves4[x]; ++i)
+                            length = MoveArrays.BishopTotalMoves4[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.BishopMoves4[x][i],
-                                                piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.BishopMoves4[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-
                             break;
                         }
                     case ChessPieceType.Rook:
                         {
-                            for (byte i = 0; i < MoveArrays.RookTotalMoves1[x]; ++i)
+                            byte length = MoveArrays.RookTotalMoves1[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.RookMoves1[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.RookMoves1[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.RookTotalMoves2[x]; ++i)
+                            length = MoveArrays.RookTotalMoves2[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.RookMoves2[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.RookMoves2[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.RookTotalMoves3[x]; ++i)
+                            length = MoveArrays.RookTotalMoves3[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.RookMoves3[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.RookMoves3[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.RookTotalMoves4[x]; ++i)
+                            length = MoveArrays.RookTotalMoves4[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.RookMoves4[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.RookMoves4[x][i], piece))
                                 {
                                     break;
                                 }
@@ -478,75 +470,70 @@ namespace MonoChess
                         }
                     case ChessPieceType.Queen:
                         {
-                            for (byte i = 0; i < MoveArrays.QueenTotalMoves1[x]; ++i)
+                            // Bishop Moves
+                            byte length = MoveArrays.BishopTotalMoves1[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves1[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.BishopMoves1[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.QueenTotalMoves2[x]; ++i)
+                            length = MoveArrays.BishopTotalMoves2[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves2[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.BishopMoves2[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.QueenTotalMoves3[x]; ++i)
+                            length = MoveArrays.BishopTotalMoves3[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves3[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.BishopMoves3[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.QueenTotalMoves4[x]; ++i)
+                            length = MoveArrays.BishopTotalMoves4[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves4[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.BishopMoves4[x][i], piece))
                                 {
                                     break;
                                 }
                             }
 
-                            for (byte i = 0; i < MoveArrays.QueenTotalMoves5[x]; ++i)
+                            // Rook Moves
+
+                            length = MoveArrays.RookTotalMoves1[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves5[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.RookMoves1[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.QueenTotalMoves6[x]; ++i)
+                            length = MoveArrays.RookTotalMoves2[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves6[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.RookMoves2[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.QueenTotalMoves7[x]; ++i)
+                            length = MoveArrays.RookTotalMoves3[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves7[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.RookMoves3[x][i], piece))
                                 {
                                     break;
                                 }
                             }
-                            for (byte i = 0; i < MoveArrays.QueenTotalMoves8[x]; ++i)
+                            length = MoveArrays.RookTotalMoves4[x];
+                            for (byte i = 0; i < length; ++i)
                             {
-                                if (
-                                    AnalyzeMove(board, MoveArrays.QueenMoves8[x][i], piece) ==
-                                    false)
+                                if (!AnalyzeMove(board, MoveArrays.RookMoves4[x][i], piece))
                                 {
                                     break;
                                 }

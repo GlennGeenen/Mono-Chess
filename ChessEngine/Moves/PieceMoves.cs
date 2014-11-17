@@ -4,18 +4,6 @@ namespace MonoChess
 {
     internal struct MoveArrays
     {
-        internal static byte[][] BishopMoves1;
-        internal static byte[] BishopTotalMoves1;
-
-        internal static byte[][] BishopMoves2;
-        internal static byte[] BishopTotalMoves2;
-
-        internal static byte[][] BishopMoves3;
-        internal static byte[] BishopTotalMoves3;
-
-        internal static byte[][] BishopMoves4;
-        internal static byte[] BishopTotalMoves4;
-
         internal static byte[][] BlackPawnMoves;
         internal static byte[] BlackPawnTotalMoves;
 
@@ -25,22 +13,14 @@ namespace MonoChess
         internal static byte[][] KnightMoves;
         internal static byte[] KnightTotalMoves;
 
-        internal static byte[][] QueenMoves1;
-        internal static byte[] QueenTotalMoves1;
-        internal static byte[][] QueenMoves2;
-        internal static byte[] QueenTotalMoves2;
-        internal static byte[][] QueenMoves3;
-        internal static byte[] QueenTotalMoves3;
-        internal static byte[][] QueenMoves4;
-        internal static byte[] QueenTotalMoves4;
-        internal static byte[][] QueenMoves5;
-        internal static byte[] QueenTotalMoves5;
-        internal static byte[][] QueenMoves6;
-        internal static byte[] QueenTotalMoves6;
-        internal static byte[][] QueenMoves7;
-        internal static byte[] QueenTotalMoves7;
-        internal static byte[][] QueenMoves8;
-        internal static byte[] QueenTotalMoves8;
+        internal static byte[][] BishopMoves1;
+        internal static byte[] BishopTotalMoves1;
+        internal static byte[][] BishopMoves2;
+        internal static byte[] BishopTotalMoves2;
+        internal static byte[][] BishopMoves3;
+        internal static byte[] BishopTotalMoves3;
+        internal static byte[][] BishopMoves4;
+        internal static byte[] BishopTotalMoves4;
 
         internal static byte[][] RookMoves1;
         internal static byte[] RookTotalMoves1;
@@ -81,15 +61,6 @@ namespace MonoChess
             MoveArrays.RookTotalMoves3 = new byte[64];
             MoveArrays.RookTotalMoves4 = new byte[64];
 
-            MoveArrays.QueenTotalMoves1 = new byte[64];
-            MoveArrays.QueenTotalMoves2 = new byte[64];
-            MoveArrays.QueenTotalMoves3 = new byte[64];
-            MoveArrays.QueenTotalMoves4 = new byte[64];
-            MoveArrays.QueenTotalMoves5 = new byte[64];
-            MoveArrays.QueenTotalMoves6 = new byte[64];
-            MoveArrays.QueenTotalMoves7 = new byte[64];
-            MoveArrays.QueenTotalMoves8 = new byte[64];
-
             MoveArrays.KingTotalMoves = new byte[64];
             
             SetMovesWhitePawn();
@@ -97,7 +68,6 @@ namespace MonoChess
             SetMovesKnight();
             SetMovesBishop();
             SetMovesRook();
-            SetMovesQueen();
             SetMovesKing();
         }
 
@@ -460,162 +430,6 @@ namespace MonoChess
             MoveArrays.RookMoves2 = arrTwo;
             MoveArrays.RookMoves3 = arrThree;
             MoveArrays.RookMoves4 = arrFour;
-        }
-
-        private static void SetMovesQueen()
-        {
-
-            byte[][] arrOne = new byte[64][];
-            byte[][] arrTwo = new byte[64][];
-            byte[][] arrThree = new byte[64][];
-            byte[][] arrFour = new byte[64][];
-            byte[][] arrFive = new byte[64][];
-            byte[][] arrSix = new byte[64][];
-            byte[][] arrSeven = new byte[64][];
-            byte[][] arrEight = new byte[64][];
-
-            for (byte y = 0; y < 8; ++y)
-            {
-                for (byte x = 0; x < 8; ++x)
-                {
-                    byte index = (byte)(y + (x * 8));
-
-                    var moveset = new List<byte>();
-                    byte move;
-
-                    byte row = x;
-                    byte col = y;
-
-                    while (row < 7)
-                    {
-                        ++row;
-
-                        move = Position(col, row);
-                        moveset.Add(move);
-                        MoveArrays.QueenTotalMoves1[index]++;
-                    }
-
-                    arrOne[index] = moveset.ToArray();
-
-                    moveset = new List<byte>();
-                    row = x;
-                    col = y;
-
-                    while (row > 0)
-                    {
-                        --row;
-
-                        move = Position(col, row);
-                        moveset.Add(move);
-                        MoveArrays.QueenTotalMoves2[index]++;
-                    }
-
-                    arrTwo[index] = moveset.ToArray();
-
-                    moveset = new List<byte>();
-                    row = x;
-                    col = y;
-
-                    while (col > 0)
-                    {
-                        --col;
-
-                        move = Position(col, row);
-                        moveset.Add(move);
-                        MoveArrays.QueenTotalMoves3[index]++;
-                    }
-
-                    arrThree[index] = moveset.ToArray();
-
-                    moveset = new List<byte>();
-                    row = x;
-                    col = y;
-
-                    while (col < 7)
-                    {
-                        ++col;
-
-                        move = Position(col, row);
-                        moveset.Add(move);
-                        MoveArrays.QueenTotalMoves4[index]++;
-                    }
-
-                    arrFour[index] = moveset.ToArray();
-
-                    moveset = new List<byte>();
-                    row = x;
-                    col = y;
-
-                    while (row < 7 && col < 7)
-                    {
-                        ++row;
-                        ++col;
-
-                        move = Position(col, row);
-                        moveset.Add(move);
-                        MoveArrays.QueenTotalMoves5[index]++;
-                    }
-
-                    arrFive[index] = moveset.ToArray();
-
-                    moveset = new List<byte>();
-                    row = x;
-                    col = y;
-
-                    while (row < 7 && col > 0)
-                    {
-                        ++row;
-                        --col;
-
-                        move = Position(col, row);
-                        moveset.Add(move);
-                        MoveArrays.QueenTotalMoves6[index]++;
-                    }
-
-                    arrSix[index] = moveset.ToArray();
-
-                    moveset = new List<byte>();
-                    row = x;
-                    col = y;
-
-                    while (row > 0 && col < 7)
-                    {
-                        --row;
-                        ++col;
-
-                        move = Position(col, row);
-                        moveset.Add(move);
-                        MoveArrays.QueenTotalMoves7[index]++;
-                    }
-
-                    arrSeven[index] = moveset.ToArray();
-
-                    moveset = new List<byte>();
-                    row = x;
-                    col = y;
-
-                    while (row > 0 && col > 0)
-                    {
-                        --row;
-                        --col;
-
-                        move = Position(col, row);
-                        moveset.Add(move);
-                        MoveArrays.QueenTotalMoves8[index]++;
-                    }
-
-                    arrEight[index] = moveset.ToArray();
-                }
-            }
-
-            MoveArrays.QueenMoves1 = arrOne;
-            MoveArrays.QueenMoves2 = arrTwo;
-            MoveArrays.QueenMoves3 = arrThree;
-            MoveArrays.QueenMoves4 = arrFour;
-            MoveArrays.QueenMoves5 = arrFive;
-            MoveArrays.QueenMoves6 = arrSix;
-            MoveArrays.QueenMoves7 = arrSeven;
-            MoveArrays.QueenMoves8 = arrEight;
         }
 
         private static void SetMovesKing()

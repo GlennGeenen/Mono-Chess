@@ -14,7 +14,6 @@ namespace MonoChess
            0,  0,  0,  0,  0,  0,  0,  0
          };
 
-
         private static readonly short[] KnightTable = new short[]
          {
           -50,-40,-30,-30,-30,-30,-40,-50,
@@ -131,29 +130,45 @@ namespace MonoChess
 
                 if (piece.PieceColor == ChessPieceColor.White)
                 {
-                    board.Score += EvaluatePieceScore(piece, x, board.whiteCastled, board.EndGamePhase,
-                     ref whiteBishopCount, ref insufficientMaterial);
+                    board.Score += EvaluatePieceScore(piece, x, board.whiteCastled, board.EndGamePhase, ref insufficientMaterial);
+
+                    if (piece.Identifier == ChessPieceType.Bishop)
+                    {
+                        ++whiteBishopCount;
+                    }
                 }
                 else if (piece.PieceColor == ChessPieceColor.Black)
                 {
-                    board.Score -= EvaluatePieceScore(piece, x, board.blackCastled, board.EndGamePhase,
-                     ref blackBishopCount, ref insufficientMaterial);
+                    board.Score -= EvaluatePieceScore(piece, x, board.blackCastled, board.EndGamePhase, ref insufficientMaterial);
+
+                    if (piece.Identifier == ChessPieceType.Bishop)
+                    {
+                        ++blackBishopCount;
+                    }
                 }
 
                 if (piece.Identifier == ChessPieceType.Knight)
                 {
-                    ++knightCount;
-
-                    if (knightCount > 1)
-                    {
-                        insufficientMaterial = false;
-                    }
+                    ++knightCount;  
                 }
+            }
 
-                if ((blackBishopCount + whiteBishopCount) > 1)
-                {
-                    insufficientMaterial = false;
-                }
+            if(whiteBishopCount > 1)
+            {
+                board.Score += 10;
+            }
+            if(blackBishopCount > 1)
+            {
+                board.Score -= 10;
+            }
+
+            if (knightCount > 1)
+            {
+                insufficientMaterial = false;
+            }
+            else if ((blackBishopCount + whiteBishopCount) > 1)
+            {
+                insufficientMaterial = false;
             }
 
             if (insufficientMaterial)
@@ -163,7 +178,6 @@ namespace MonoChess
                 board.InsufficientMaterial = true;
                 return;
             }
-
 
             if (remainingPieces < 10)
             {
@@ -329,10 +343,11 @@ namespace MonoChess
         }
 
         private static int EvaluatePieceScore(ChessPiece piece, byte position, bool castled, 
-                                     bool endGamePhase,ref byte bishopCount, 
-                                     ref bool insufficientMaterial)
+                                     bool endGamePhase, ref bool insufficientMaterial)
         {
-            if (piece.PieceColor == ChessPieceColor.Black)
+            bool isWhite = piece.PieceColor == ChessPieceColor.White;
+
+            if (!isWhite)
             {
                 position = (byte)(63 - position);
             }
@@ -366,7 +381,7 @@ namespace MonoChess
                 //Calculate Position Values
                 score += PawnTable[position];
 
-                if (piece.PieceColor == ChessPieceColor.White)
+                if (isWhite)
                 {
                     if (whitePawnCount[position % 8] > 0)
                     {
@@ -389,7 +404,6 @@ namespace MonoChess
                         if (piece.AttackedValue == 0)
                         {
                             whitePawnCount[position % 8] += 100;
-
 
                             if (piece.DefendedValue != 0)
                                 whitePawnCount[position % 8] += 25;
@@ -429,7 +443,6 @@ namespace MonoChess
                     }
 
                     blackPawnCount[position % 8] += 10;
-
                 }
             }
             else if (piece.Identifier == ChessPieceType.Knight)
@@ -444,41 +457,30 @@ namespace MonoChess
             }
             else if (piece.Identifier == ChessPieceType.Bishop)
             {
-                ++bishopCount;
-                if (bishopCount >= 2)
-                {
-                    //2 Bishops receive a bonus
-                    score += 10;
-                }
+                score += BishopTable[position];
+
                 //In the end game Bishops are worth more
                 if (endGamePhase)
                 {
                     score += 10;
                 }
-                score += BishopTable[position];
             }
             else if (piece.Identifier == ChessPieceType.Rook)
             {
                 insufficientMaterial = false;
-                if (piece.Moved && castled == false)
-                {
-                    score -= 10;
-                }
             }
             else if (piece.Identifier == ChessPieceType.Queen)
             {
                 insufficientMaterial = false;
-                if (piece.Moved && !endGamePhase)
-                {
-                    score -= 10;
-                }
             }
             else if (piece.Identifier == ChessPieceType.King)
             {
+                // Lose points for having few move options
                 if (piece.ValidMoves.Count < 2)
                 {
                     score -= 5;
                 }
+
                 if (endGamePhase)
                 {
                     score += KingTableEndGame[position];
@@ -486,7 +488,9 @@ namespace MonoChess
                 else
                 {
                     score += KingTable[position];
-                    if (piece.Moved && castled == false)
+
+                    // Lose points for not castling
+                    if (piece.Moved && !castled)
                     {
                         score -= 30;
                     }

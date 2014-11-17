@@ -37,11 +37,12 @@ namespace MonoChess
 
         public static bool IsValidMove(ChessBoard board, byte sourceIndex, byte destinationIndex)
         {
-            if (board.pieces[sourceIndex] == null)
+            ChessPiece piece = board.pieces[sourceIndex];
+            if (piece == null)
             {
                 return false;
             }
-            foreach (byte bs in board.pieces[sourceIndex].ValidMoves)
+            foreach (byte bs in piece.ValidMoves)
             {
                 if (bs == destinationIndex)
                 {
@@ -74,16 +75,13 @@ namespace MonoChess
                     return false;
                 }
             }
-            else
-            {
-                if (board.blackInCheck)
+            else if (board.blackInCheck)
                 {
                     //Invalid Move -> undo last move
                     ChessEngine.MoveContent(board, destinationIndex, sourceIndex, ChessPieceType.Queen);
                     PieceValidMoves.GenerateValidMoves(board);
                     return false;
                 }
-            }
             return true;
         }
 
